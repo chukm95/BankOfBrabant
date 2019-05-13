@@ -7,11 +7,14 @@ namespace BankOfBrabant.Models
 {
     public class SpendingAccount:AccountAbstract
     {
-        public SpendingAccount(double balance, double interest, string accountNumber)
+        public SpendingAccount(double balance, double interest, int accountNumber, int passNumber, int pinCode, string accountName)
         {
-            balance = this.Balance;
-            interest = this.Interest;
-            accountNumber = this.AccountNumber;
+            Balance = balance;
+            Interest = interest;
+            AccountNumber = accountNumber;
+            PassNumber = passNumber;
+            PinCode = pinCode;
+            AccountName = accountName;
         }
 
         public new void AddMoney(double addToSaving)

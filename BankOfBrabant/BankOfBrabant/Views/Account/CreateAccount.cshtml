@@ -10,20 +10,31 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CreateAccount">
+        <form asp-action="CreateButton" asp-controller="Account">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="PassNumber" class="control-label"></label>
                 <input asp-for="PassNumber" class="form-control" />
                 <span asp-validation-for="PassNumber" class="text-danger"></span>
             </div>
-        </form>
-        <form asp-action="CreateButton_Click()" asp-controller="Account">
-            <div class="dropdown" name="dropbox">
-                <select>
-                    <option value="1"> savingsAccount</option>
-                    <option value="2"> depositAccount</option>
-                    <option value="3"> paymentAccount</option>
+            <div class="form-group">
+                <label asp-for="AccountName" class="control-label"></label>
+                <input asp-for="AccountName" class="form-control" />
+                <span asp-validation-for="AccountName" class="text-danger"></span>
+                @ViewBag.Message
+            </div>
+            <div class="form-group">
+                <label asp-for="PinCode" class="control-label"></label>
+                <input asp-for="PinCode" class="form-control" />
+                <span asp-validation-for="PinCode" class="text-danger"></span>
+            </div>
+
+
+            <div class="dropdown">
+                <select name="accountType">
+                    <option value="savingsAccount"> savingsAccount</option>
+                    <option value="depositAccount"> depositAccount</option>
+                    <option value="paymentAccount"> paymentAccount</option>
                 </select>
             </div>
             <input type="submit" name="createButton" />

@@ -7,11 +7,14 @@ namespace BankOfBrabant.Models
 {
     public class InternalAccount:AccountAbstract
     {
-        public InternalAccount(double balance, double interest, string accountNumber)
+        public InternalAccount(double balance, double interest, int accountNumber, int passNumber, int pinCode, string accountName)
         {
-            balance = this.Balance;
-            interest = this.Interest;
-            accountNumber = this.AccountNumber;
+            Balance = balance;
+            Interest = interest;
+            AccountNumber = accountNumber;
+            PassNumber = passNumber;
+            PinCode = pinCode;
+            AccountName = accountName;
         }
 
         public new void AddMoney(double addToSaving)
@@ -22,8 +25,6 @@ namespace BankOfBrabant.Models
         public new void WithdrawMoney(double outGoing)
         {
             Balance -= outGoing;
-            //bla
-        
         }
     }
 }

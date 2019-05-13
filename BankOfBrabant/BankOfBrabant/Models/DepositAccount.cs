@@ -10,11 +10,14 @@ namespace BankOfBrabant.Models
         public TimeSpan timeLimit, time;
         public double CancellationFee;
 
-        public DepositAccount(double balance, double interest, string accountNumber)
+        public DepositAccount(double balance, double interest, int accountNumber, int passNumber, int pinCode, string accountName)
         {
-            balance = this.Balance;
-            interest = this.Interest;
-            accountNumber = this.AccountNumber;
+            Balance = balance;
+            Interest = interest;
+            AccountNumber = accountNumber;
+            PassNumber = passNumber;
+            PinCode = pinCode;
+            AccountName = accountName;
         }
 
         public void FreezeMoney(double amount, DateTime endDate, DateTime startDate, int duration)

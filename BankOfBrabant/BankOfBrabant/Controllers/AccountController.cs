@@ -23,9 +23,7 @@ namespace BankOfBrabant.Controllers
             ViewBag.rekeningnummer = "NL INGB 00080088";
             return View();
         }
-
-
-
+               
         public ActionResult CreateButton_Click()
         {
             ViewBag.Message = "Account created";
