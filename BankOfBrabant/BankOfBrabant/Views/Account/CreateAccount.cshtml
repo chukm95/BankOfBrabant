@@ -1,0 +1,41 @@
+﻿@model BankOfBrabant.Models.AccountAbstract
+
+@{
+    ViewData["Title"] = "CreateAccount";
+}
+
+<h2>Account</h2>
+
+<h4>Create Account</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateAccount">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PassNumber" class="control-label"></label>
+                <input asp-for="PassNumber" class="form-control" />
+                <span asp-validation-for="PassNumber" class="text-danger"></span>
+            </div>
+        </form>
+        <form asp-action="CreateButton_Click()" asp-controller="Account">
+            <div class="dropdown" name="dropbox">
+                <select>
+                    <option value="1"> savingsAccount</option>
+                    <option value="2"> depositAccount</option>
+                    <option value="3"> paymentAccount</option>
+                </select>
+            </div>
+            <input type="submit" name="createButton" />
+        </form>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
