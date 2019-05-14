@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<form asp-action="zetopscherm" asp-controller="Test">
+    <input type="text" name="naam" />
+    <select name="cars">
+        <option value="volvo">Volvo XC90</option>
+        <option value="saab">Saab 95</option>
+        <option value="mercedes">Mercedes SLK</option>
+        <option value="audi">Audi TT</option>
+    </select>
+    <input type="submit" name="opslaan" />
+</form>
+
