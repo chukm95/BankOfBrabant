@@ -16,7 +16,7 @@ namespace BankOfBrabant.Controllers
     public class AccountController : Controller
     {
         SQLManager sqm = SQLManager.Initialize("94.208.132.186", "23412", "testdb", "user02", "X7f6EysG8jrgNQvp");
-        // GET: /<controller>/
+        //// GET: /<controller>/
         public IActionResult CreateAccount()
         {
             return View();
