@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Transactie>
+@{
+    ViewData["Title"] = "Transactie log";
+}
+
+<h2>Transactie log</h2>
+
+<hr />
+
+<table class="table table-bordered table-responsive table-hover">
+
+    <tr>
+        <th>Rekening van</th>
+        <th>Rekening naar</th>
+        <th>Euros</th>
+        <th>Datum & tijd</th>
+    </tr>
+    @foreach (var d in Model)
+    {
+        <tr>
+
+            <td>@d.Verstuurder</td>
+            <td>@d.Ontvanger</td>
+            <td>@d.Euros</td>
+            <td>@d.Datum</td>
+
+        </tr>
+    }
+
+</table> 
+

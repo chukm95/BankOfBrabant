@@ -1,0 +1,79 @@
+﻿@model BankOfBrabant.Models.Klant
+
+@{
+    ViewData["Title"] = "Klant aanmaken";
+}
+
+<h2>Klant aanmaken</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateKlant" asp-controller="Klanten" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Voornaam" class="control-label"></label>
+                <input asp-for="Voornaam" class="form-control" />
+                <span asp-validation-for="Voornaam" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tussenvoegsel" class="control-label"></label>
+                <input asp-for="Tussenvoegsel" class="form-control" />
+                <span asp-validation-for="Tussenvoegsel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Achternaam" class="control-label"></label>
+                <input asp-for="Achternaam" class="form-control" />
+                <span asp-validation-for="Achternaam" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Adres" class="control-label"></label>
+                <input asp-for="Adres" class="form-control" />
+                <span asp-validation-for="Adres" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Geslacht" class="control-label"></label>
+                <input asp-for="Geslacht" class="form-control" value=""/>
+                <span asp-validation-for="Geslacht" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KvkNummer" class="control-label"></label>
+                <input asp-for="KvkNummer" class="form-control" />
+                <span asp-validation-for="KvkNummer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="BKRPositief" /> @Html.DisplayNameFor(model => model.BKRPositief)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Blacklisted" /> @Html.DisplayNameFor(model => model.Blacklisted)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="PaspoortCheck" /> @Html.DisplayNameFor(model => model.PaspoortCheck)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
