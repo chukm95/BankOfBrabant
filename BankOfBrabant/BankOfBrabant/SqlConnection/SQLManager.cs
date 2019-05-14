@@ -1,22 +1,14 @@
-﻿using BankOfBrabant.Models;
+﻿using SqlConnection.DatabaseShit.Entiteiten;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using static BankOfBrabant.Models.Klant;
+using System.Text;
 
-namespace BankOfBrabant.SqlConnection
+namespace SqlConnection.DatabaseShit
 {
     class SQLManager
     {
-
-
-
-
-
-
 
         /// <summary>
         /// The single instance of the SQLManager
@@ -26,14 +18,6 @@ namespace BankOfBrabant.SqlConnection
             get;
             private set;
         }
-
-
-
-
-
-
-
-
 
         /// <summary>
         /// Method to initialize the sql manager
@@ -82,11 +66,12 @@ namespace BankOfBrabant.SqlConnection
         //@TODO search on email
 
         //Rekeningen
-        private const string QRY_CreateRekening = "insert into Rekeningen(RekeningNummer, RekeningType, Saldo, RentePercentage) values(@RekeningNummer, @RekeningType, @Saldo, @RentePercentage); SELECT LAST_INSERT_ID();";
+        private const string QRY_CreateRekening = "insert into Rekeningen(RekeningNummer, RekeningType, Saldo, RentePercentage, RekeningNaam, PassNummer, PinCode) values(@RekeningNummer, @RekeningType, @Saldo, @RentePercentage, @RekeningNaam, @PassNumber, @PinCode); SELECT LAST_INSERT_ID();";
         private const string QRY_UpdateRekening = "update Rekeningen set RekeningType = @RekeningType, Saldo = @Saldo, RentePercentage = @RentePercentage where ID = @ID;";
         private const string QRY_ReadAllFromRekeningen = "select * from Rekeningen;";
         private const string QRY_ReadRekeningByID = "select * from Rekeningen where ID = @ID;";
         private const string QRY_DeleteRekeningByID = "delete from Rekeningen where ID = @ID;";
+        private const string QRY_ReadRekeningByPassNumber = "select * from Rekeningen where PassNummer = @PassNumber;";
 
         //RekeningBevoegde
         private const string QRY_CreateRekeningBevoegde = "insert into RekeningBevoegdes(KlantID, RekeningID, Relatie) values (@KlantID, @RekeningID, @Relatie);";
@@ -96,10 +81,6 @@ namespace BankOfBrabant.SqlConnection
         private const string QRY_ReadRekeningBevoegdeByKlantID = "select * from RekeningBevoegdes where KlantID = @KlantID;";
         private const string QRY_ReadRekeningBevoegdeByRekeningID = "select * from RekeningBevoegdes where RekeningID = @RekeningID;";
         private const string QRY_DeleteRekeningBevoegde = "delete RekeningBevoegdes where RekeningID = @RekeningID and KlantID = @KlantID;";
-
-        //Transacties
-        private const string QRY_CreateTransactie = "insert into Transacties(Verstuurder, Ontvanger, Euros, Datum) values (@Verstuurder, @Ontvanger, @Euros, @Relatie);";
-        private const string QRY_ReadAllFromTransacties = "select * from transacties";
         //@TODO maby an update qry needed to save changes, or is it a new relation?
 
 
@@ -331,19 +312,22 @@ namespace BankOfBrabant.SqlConnection
 
         public ulong CreateRekening(Rekening rekening)
         {
-            return CreateRekening(rekening.Nummer, rekening.RentePercentage, rekening.Saldo, rekening.Type);
+            return CreateRekening(rekening.Nummer, rekening.AccountType, rekening.Saldo, rekening.RentePercentage, rekening.RekeningNaam, rekening.PassNumber, rekening.PinCode);
         }
 
-        public ulong CreateRekening(string nummer, float rentePercentage, decimal saldo, RekeningTypes type)
+        public ulong CreateRekening(string nummer, string rekeningType, decimal saldo, float rentePercentage, string accountName, int passNumber, int pinCode)
         {
             mySqlConnection.Open();
             MySqlCommand command = mySqlConnection.CreateCommand();
 
             command.CommandText = QRY_CreateRekening;
             command.Parameters.AddWithValue("@RekeningNummer", nummer);
-            command.Parameters.AddWithValue("@RekeningType", (sbyte)(byte)type);
+            command.Parameters.AddWithValue("@RekeningType", rekeningType);
             command.Parameters.AddWithValue("@Saldo", saldo);
             command.Parameters.AddWithValue("@RentePercentage", rentePercentage);
+            command.Parameters.AddWithValue("@RekeningNaam", accountName);
+            command.Parameters.AddWithValue("@PassNumber", passNumber);
+            command.Parameters.AddWithValue("@PinCode", pinCode);
 
             MySqlDataReader reader = command.ExecuteReader();
 
@@ -359,26 +343,29 @@ namespace BankOfBrabant.SqlConnection
         }
 
         public void UpdateRekening(Rekening rekening)
-        {
-            UpdateRekening(rekening.ID, rekening.RentePercentage, rekening.Saldo, rekening.Type);
-        }
+          {
+               UpdateRekening(rekening.Nummer, rekening.AccountType, rekening.Saldo, rekening.RentePercentage, rekening.RekeningNaam, rekening.PassNumber, rekening.PinCode);
+          }
 
-        public void UpdateRekening(ulong id, float rentePercentage, decimal saldo, RekeningTypes type)
+        public void UpdateRekening(string nummer, string rekeningType, decimal saldo, float rentePercentage, string accountName, int passNumber, int pinCode)
         {
             mySqlConnection.Open();
             MySqlCommand command = mySqlConnection.CreateCommand();
 
             command.CommandText = QRY_UpdateRekening;
-            command.Parameters.AddWithValue("@RekeningType", (sbyte)(byte)type);
+            command.Parameters.AddWithValue("@RekeningNummer", nummer);
+            command.Parameters.AddWithValue("@RekeningType", rekeningType);
             command.Parameters.AddWithValue("@Saldo", saldo);
             command.Parameters.AddWithValue("@RentePercentage", rentePercentage);
-            command.Parameters.AddWithValue("@ID", id);
+            command.Parameters.AddWithValue("@RekeningNaam", accountName);
+            command.Parameters.AddWithValue("@PassNumber", passNumber);
+            command.Parameters.AddWithValue("@PinCode", pinCode);
 
             command.ExecuteNonQuery();
             command.Dispose();
             mySqlConnection.Close();
         }
-
+        
         public Rekening[] ReadAllFromRekeningen()
         {
             DataTable table = new DataTable();
@@ -389,6 +376,30 @@ namespace BankOfBrabant.SqlConnection
 
             for (int i = 0; i < table.Rows.Count; i++)
                 rekeningen[i] = new Rekening(table.Rows[i]);
+
+            return rekeningen;
+        }
+
+        public Rekening[] ReadRekeningByPassNumber(int passNumber)
+        {
+            DataTable table = new DataTable();
+            MySqlCommand command = mySqlConnection.CreateCommand();
+
+            command.CommandText = QRY_ReadRekeningByPassNumber;
+            command.Parameters.AddWithValue("@PassNumber", passNumber);
+
+            MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+            adapter.Fill(table);
+
+            if (table.Rows.Count < 1)
+                return null;
+
+            Rekening[] rekeningen = new Rekening[table.Rows.Count];
+
+            for (int i = 0; i < table.Rows.Count; i++)
+                rekeningen[i] = new Rekening(table.Rows[i]);
+
+            command.Dispose();
 
             return rekeningen;
         }
@@ -559,45 +570,5 @@ namespace BankOfBrabant.SqlConnection
             command.Dispose();
             mySqlConnection.Close();
         }
-
-        public ulong CreateTransactie(string verstuurder, string ontvanger, double euros, DateTime datum)
-        {
-            mySqlConnection.Open();
-            MySqlCommand command = mySqlConnection.CreateCommand();
-
-            command.CommandText = QRY_CreateTransactie;
-            command.Parameters.AddWithValue("@Verstuurder", verstuurder);
-            command.Parameters.AddWithValue("@Ontvanger", ontvanger);
-            command.Parameters.AddWithValue("@Euros", euros);
-            command.Parameters.AddWithValue("@Datum", datum);
-
-            MySqlDataReader reader = command.ExecuteReader();
-
-            ulong id = ulong.MaxValue;
-
-            if (reader.Read())
-                id = reader.GetUInt64(0);
-
-            command.Dispose();
-            mySqlConnection.Close();
-
-            return id;
-        }
-
-        public Transactie[] ReadAllFromTransacties()
-        {
-            DataTable table = new DataTable();
-            MySqlDataAdapter adapter = new MySqlDataAdapter(QRY_ReadAllFromTransacties, mySqlConnection);
-            adapter.Fill(table);
-
-            Transactie[] transacties = new Transactie[table.Rows.Count];
-            for (int i = 0; i < table.Rows.Count; i++)
-                transacties[i] = new Transactie(table.Rows[i]);
-
-            return transacties;
-        }
-
     }
 }
-
-
