@@ -83,7 +83,11 @@ namespace SqlConnection.DatabaseShit
         private const string QRY_DeleteRekeningBevoegde = "delete RekeningBevoegdes where RekeningID = @RekeningID and KlantID = @KlantID;";
         //@TODO maby an update qry needed to save changes, or is it a new relation?
 
-
+         //Transacties
+        private const string QRY_CreateTransactie = "insert into Transacties(Verstuurder, Ontvanger, Euros, Datum) values (@Verstuurder, @Ontvanger, @Euros, @Relatie);";
+        private const string QRY_ReadAllFromTransacties = "select * from transacties";
+        //@TODO maby an update qry needed to save changes, or is it a new relation?
+        
         //Private constructor so the class is not initialized outside of this class
         private SQLManager(string serverIp, string port, string databaseName, string userName, string password)
         {
@@ -569,6 +573,43 @@ namespace SqlConnection.DatabaseShit
             command.ExecuteNonQuery();
             command.Dispose();
             mySqlConnection.Close();
+        }
+        
+        public ulong CreateTransactie(string verstuurder, string ontvanger, double euros, DateTime datum)
+        {
+            mySqlConnection.Open();
+            MySqlCommand command = mySqlConnection.CreateCommand();
+
+            command.CommandText = QRY_CreateTransactie;
+            command.Parameters.AddWithValue("@Verstuurder", verstuurder);
+            command.Parameters.AddWithValue("@Ontvanger", ontvanger);
+            command.Parameters.AddWithValue("@Euros", euros);
+            command.Parameters.AddWithValue("@Datum", datum);
+
+            MySqlDataReader reader = command.ExecuteReader();
+
+            ulong id = ulong.MaxValue;
+
+            if (reader.Read())
+                id = reader.GetUInt64(0);
+
+            command.Dispose();
+            mySqlConnection.Close();
+
+            return id;
+        }
+
+        public Transactie[] ReadAllFromTransacties()
+        {
+            DataTable table = new DataTable();
+            MySqlDataAdapter adapter = new MySqlDataAdapter(QRY_ReadAllFromTransacties, mySqlConnection);
+            adapter.Fill(table);
+
+            Transactie[] transacties = new Transactie[table.Rows.Count];
+            for (int i = 0; i < table.Rows.Count; i++)
+                transacties[i] = new Transactie(table.Rows[i]);
+
+            return transacties;
         }
     }
 }
