@@ -24,7 +24,7 @@ namespace BankOfBrabant.Controllers
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Type rekeninghouder";
 
             return View();
         }
@@ -33,13 +33,11 @@ namespace BankOfBrabant.Controllers
         {
             return View();
         }
-    
-        
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        
     }
 }
