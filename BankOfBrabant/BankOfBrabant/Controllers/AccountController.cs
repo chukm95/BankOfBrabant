@@ -24,7 +24,7 @@ namespace BankOfBrabant.Controllers
 
         public ActionResult CreateButton(String accountType, int PassNumber, string AccountName, int PinCode)
         {
-            sqm = SQLManager.Instance;
+          
 
             if (PassNumber != 0 && !String.IsNullOrEmpty(AccountName) && PinCode != 0)
             {
@@ -50,7 +50,7 @@ namespace BankOfBrabant.Controllers
                     {
                         AccountAbstract account = new SpendingAccount(500, 1, 7, PassNumber, PinCode, AccountName);
                         ViewBag.Message = accountType;
-                        Rekening rekening = new Rekening("1", accountType, 500, 1, AccountName, PassNumber, PinCode);
+                        Rekening rekening = new Rekening("11", accountType, 500, 1, AccountName, PassNumber, PinCode);
                         sqm.CreateRekening(rekening);
                         return View(account);
                     }
