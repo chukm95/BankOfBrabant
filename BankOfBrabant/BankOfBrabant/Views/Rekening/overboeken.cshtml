@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "overboeken";
 }
 
@@ -7,10 +6,10 @@
 <div class="row">
     <div class="col-md-offset-2 col-md-8">
         <h2>overboeken</h2>
-        <form asp-action="index" asp-controller="home">
+        <form asp-action="rekening" asp-controller="overboeken" method="post">
             <div class="form-group">
                 <label for="fromRekening">Van rekening</label>
-                <input type="text" class="form-control" id="fromRekening" value="@ViewBag.rekeningnummer">
+                <input type="text" class="form-control" id="fromRekening" value="@ViewBag.rekeningfrom">
             </div>
             <div class="form-group">
                 <label for="bedrag">Bedrag</label>
@@ -24,4 +23,4 @@
             <button type="submit" class="btn btn-primary">Overboeken</button>
         </form>
     </div>
-    </div>
+</div>
