@@ -46,19 +46,3 @@ CONSTRAINT fkfk_RekeningID FOREIGN KEY (RekeningID) REFERENCES Rekeningen(ID) ON
 PRIMARY KEY (KlantID, RekeningID)
 
 );
-
-CREATE TABLE `transacties` (
-  `Verstuurder` varchar(50) NOT NULL,
-  `Ontvanger` varchar(50) NOT NULL,
-  `Euros` double NOT NULL,
-  `Datum` datetime NOT NULL,
-  `ID` bigint(20) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `Verstuurder_UNIQUE` (`Verstuurder`),
-  UNIQUE KEY `Ontvanger_UNIQUE` (`Ontvanger`),
-  KEY `rekeningnaarFK_idx` (`Ontvanger`),
-  CONSTRAINT `rekeningnaarFK` FOREIGN KEY (`Ontvanger`) REFERENCES `rekeningen` (`RekeningNummer`),
-  CONSTRAINT `rekeningvanFK` FOREIGN KEY (`Verstuurder`) REFERENCES `rekeningen` (`RekeningNummer`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
-
-
