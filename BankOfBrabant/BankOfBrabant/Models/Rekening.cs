@@ -101,6 +101,8 @@ namespace BankOfBrabant.Models
             PassNumber = (int)row["PassNummer"];
             PinCode = (int)row["PinCode"];
         }
+
+
     }
 
 }
