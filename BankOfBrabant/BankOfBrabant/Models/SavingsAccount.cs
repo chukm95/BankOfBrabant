@@ -16,9 +16,7 @@ namespace BankOfBrabant.Models
             PinCode = pinCode;
             AccountName = accountName;
         }
-
-
-
+                
         public new void AddMoney(double addToSaving)
         {
             Balance += addToSaving;

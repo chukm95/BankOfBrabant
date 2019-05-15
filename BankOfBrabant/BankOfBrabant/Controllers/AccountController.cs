@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BankOfBrabant.Models;
 using SqlConnection.DatabaseShit;
-using SqlConnection.DatabaseShit.Entiteiten;
+//using SqlConnection.DatabaseShit.Entiteiten;
 
 
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BankOfBrabant.Models;
-using BankOfBrabant.SqlConnection;
+using SqlConnection.DatabaseShit;
 
 namespace BankOfBrabant.Controllers
 {

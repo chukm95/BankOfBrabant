@@ -1,9 +1,10 @@
-﻿using SqlConnection.DatabaseShit.Entiteiten;
+﻿//using SqlConnection.DatabaseShit.Entiteiten;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using BankOfBrabant.Models;
 
 namespace SqlConnection.DatabaseShit
 {
@@ -316,7 +317,7 @@ namespace SqlConnection.DatabaseShit
 
         public ulong CreateRekening(Rekening rekening)
         {
-            return CreateRekening(rekening.Nummer, rekening.AccountType, rekening.Saldo, rekening.RentePercentage, rekening.RekeningNaam, rekening.PassNumber, rekening.PinCode);
+            return CreateRekening(rekening.Nummer, rekening.Type.ToString() , rekening.Saldo, rekening.RentePercentage, rekening.RekeningNaam, rekening.PassNumber, rekening.PinCode);
         }
 
         public ulong CreateRekening(string nummer, string rekeningType, decimal saldo, float rentePercentage, string accountName, int passNumber, int pinCode)
@@ -348,7 +349,7 @@ namespace SqlConnection.DatabaseShit
 
         public void UpdateRekening(Rekening rekening)
           {
-               UpdateRekening(rekening.Nummer, rekening.AccountType, rekening.Saldo, rekening.RentePercentage, rekening.RekeningNaam, rekening.PassNumber, rekening.PinCode);
+               UpdateRekening(rekening.Nummer, rekening.Type.ToString(), rekening.Saldo, rekening.RentePercentage, rekening.RekeningNaam, rekening.PassNumber, rekening.PinCode);
           }
 
         public void UpdateRekening(string nummer, string rekeningType, decimal saldo, float rentePercentage, string accountName, int passNumber, int pinCode)

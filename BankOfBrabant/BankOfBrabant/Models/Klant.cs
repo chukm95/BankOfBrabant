@@ -6,16 +6,17 @@ using System.Text;
 
 namespace BankOfBrabant.Models
 {
+    public enum Geslachten
+    {
+        MAN = 0x01,
+        VROUW = 0x02,
+        OVERIG = 0x03
+    }
 
     public class Klant
     {
 
-        public enum Geslachten
-        {
-            MAN = 0x01,
-            VROUW = 0x02,
-            OVERIG = 0x03
-        }
+       
 
         public ulong ID
         {
