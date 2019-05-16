@@ -1,0 +1,88 @@
+﻿<!--
+    author: everyone
+    date: 15-05-2019
+    last edited: 15-05-2019
+    changes:
+    15-05-2019     created
+-->
+@model BankOfBrabant.Models.Client
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Client</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Insertion)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Insertion)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.gender)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.gender)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.KVKNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.KVKNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.KVKPositive)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.KVKPositive)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Blacklisted)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Blacklisted)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PassportCheck)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PassportCheck)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ID" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

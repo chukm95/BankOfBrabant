@@ -1,0 +1,43 @@
+﻿<!--
+    author: everyone
+    date: 15-05-2019
+    last edited: 15-05-2019
+    changes:
+    15-05-2019     created
+-->
+model BankOfBrabant.Models.AccountHolder
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AccountHolder</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Client)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Client.ID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Account)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Account.ID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HolderType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HolderType)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
