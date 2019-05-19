@@ -1,0 +1,28 @@
+﻿<!--
+    author: Davey
+    date: 19-05-2019
+    last edited: 19-05-2019
+    changes:
+    19-05-2019     created
+-->
+
+@{
+    ViewData["Title"] = "Accountholder login";
+}
+
+<h2>Accountholder login</h2>
+<div class="row">
+    <div class="col-md-2">
+        <form asp-action="Login_Accountholder" controller="login">
+            <label name="Passnumber" class="control-label">Passnumber</label>
+            <input type="text" name="Passnumber" class="text-danger" />
+            <label name="Pincode" class="control-label">Pincode</label>
+            <input type="password" name="Password" class="text-danger" />
+
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+

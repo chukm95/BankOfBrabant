@@ -1,0 +1,30 @@
+﻿<!--
+    author: Davey
+    date: 19-05-2019
+    last edited: 19-05-2019
+    changes:
+    19-05-2019     created
+-->
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+<h4>Please log in.</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Change_Press">
+            <label name="UserType" class="control-label"></label>
+            <select name="UserType" class="form-control">
+                <option value="Employee">Employee</option>
+                <option value="Accountholder">Accountholder</option>
+            </select>
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+

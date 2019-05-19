@@ -1,0 +1,28 @@
+﻿<!--
+    author: Davey
+    date: 19-05-2019
+    last edited: 19-05-2019
+    changes:
+    19-05-2019     created
+-->
+
+@{
+    ViewData["Title"] = "Employee login";
+}
+
+<h2>Employee login</h2>
+<div class="row">
+    <div class="col-md-2">
+        <form asp-action="Login_Employee">
+            <label name="Username" class="control-label">First name</label>
+            <input type="text" name="Firstname" class="text-danger" />
+            <label name="Password" class="control-label">Password</label>
+            <input type="password" name="Password" class="text-danger" />
+
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
