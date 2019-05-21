@@ -151,6 +151,48 @@ namespace BankOfBrabant.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> TransferView(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var account = await _context.Account.FindAsync(id);
+
+            if (account == null)
+                return NotFound();
+
+            return View(account);
+        }
+        [HttpPost,ActionName("Transfer")]
+        public async Task<IActionResult> Transfer(int id,string number, double amount)
+        {
+            ViewBag.id = id;
+            ViewBag.number = number;
+            ViewBag.amount = amount;
+
+            var account = await _context.Account.FindAsync(id);
+
+            if (account == null)
+                return NotFound();
+
+            if (account.Balance - (decimal)amount < account.CreditLimit)
+                return NotFound(); //error creditlimit
+
+            //elf proef
+
+            account.Balance -= (decimal)amount;
+
+            var transaction = new Transaction();
+            
+
+            _context.Update(account);
+            //_context.Add(new Transaction);
+
+            var transactie = new Transaction();
+
+            return View();
+        }
+
         private bool TransactionExists(int id)
         {
             return _context.Transaction.Any(e => e.ID == id);
