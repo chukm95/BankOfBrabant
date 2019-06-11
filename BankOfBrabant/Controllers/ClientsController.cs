@@ -144,6 +144,29 @@ namespace BankOfBrabant.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> AddClient(string rekeningtype, bool bkr, bool paspoort, bool blacklist, string FirstName, string Insertion, string LastName, string Email, string Address, string gender, string KVKNumber)
+        {
+
+            Client client = new Client()
+            {
+                FirstName = FirstName,
+                Insertion = Insertion,
+                LastName = LastName,
+                Email = Email,
+                Address = Address,
+                gender = Gender.MALE,
+                KVKNumber = KVKNumber,
+                KVKPositive = bkr,
+                Blacklisted = blacklist,
+                PassportCheck = paspoort
+
+            };
+            _context.Add(client);
+            await _context.SaveChangesAsync();
+
+            return View("Index", await _context.Client.ToListAsync());
+        }
+
         private bool ClientExists(int id)
         {
             return _context.Client.Any(e => e.ID == id);

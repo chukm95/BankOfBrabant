@@ -17,7 +17,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="AddClient" asp-controller="Clients">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
@@ -46,7 +46,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="gender" class="control-label"></label>
-                <select asp-for="gender" class="form-control"></select>
+                <select asp-for="gender" class="form-control">
+                    <option value="male">Male</option>
+                    <option value="female">female</option>
+                    <option value="other">Other</option>
+                </select>
                 <span asp-validation-for="gender" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -54,27 +58,11 @@
                 <input asp-for="KVKNumber" class="form-control" />
                 <span asp-validation-for="KVKNumber" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="KVKPositive" /> @Html.DisplayNameFor(model => model.KVKPositive)
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="Blacklisted" /> @Html.DisplayNameFor(model => model.Blacklisted)
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="PassportCheck" /> @Html.DisplayNameFor(model => model.PassportCheck)
-                    </label>
-                </div>
-            </div>
+
+            <br />
+            <input type="checkbox" name="bkr" value="true"> BKR goedgekeurd?<br />
+            <input type="checkbox" name="paspoort" value="true"> Paspoort gechecked?<br />
+            <input type="checkbox" name="blacklist" value="true"> Is geblacklist?<br />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>

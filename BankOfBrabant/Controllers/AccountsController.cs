@@ -144,7 +144,7 @@ namespace BankOfBrabant.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AccountExists(int id)
+            private bool AccountExists(int id)
         {
             return _context.Account.Any(e => e.ID == id);
         }
